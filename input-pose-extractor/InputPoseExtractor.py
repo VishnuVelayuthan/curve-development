@@ -7,6 +7,10 @@ from habitat_sim.utils.data import ImageExtractor, PoseExtractor
 
 @registry.register_pose_extractor(name="input_pose_extractor")
 class InputPoseExtractor(PoseExtractor):
+    # view is the occupancy grid
+    # fp is the file path
+    # need to return an array of poses   
+    #   pose = (point on map, point to direct, fp)
     def extract_poses(self, view, fp):
 
         poses = []
