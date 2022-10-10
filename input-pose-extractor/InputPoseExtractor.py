@@ -21,7 +21,7 @@ class InputPoseExtractor(PoseExtractor):
         y_off = 10 * sin(90 - theta)
         x_off = 10 * cos(90 - theta)
 
-        point_of_interest = (x + x_off, y + y_off)
+        point_of_interest = (int(x + x_off), int(y + y_off))
 
         pose = (point, point_of_interest, fp)
 
