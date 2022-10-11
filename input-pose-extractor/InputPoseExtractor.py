@@ -1,5 +1,6 @@
 import numpy as np
 import habitat_sim.registry as registry
+import pdb 
 from math import sin, cos
 
 # from ImageExtractor import x, y, theta
@@ -19,6 +20,7 @@ class InputPoseExtractor(PoseExtractor):
         x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
         point = (x, y)
 
+        pdb.set_trace()
         # calculating poi by rotation from looking up the y-axis 
         # using a fixed radius and to rotate from fixed radius
         # need to check if poi can be out of bounds
@@ -33,6 +35,8 @@ class InputPoseExtractor(PoseExtractor):
         pose = (point, point_of_interest, fp)
 
         poses.append(pose)
+
+        pdb.set_trace()
         return poses
 
 

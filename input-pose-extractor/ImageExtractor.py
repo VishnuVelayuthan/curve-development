@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import InputPoseExtractor 
+import pdb
 
 from habitat_sim.utils.data import ImageExtractor
 
@@ -42,6 +43,7 @@ extractor = ImageExtractor(
 extractor.set_mode('train')
 
 # Index in to the extractor like a normal python list
+pdb.set_trace()
 sample = extractor[0]
 
 # Or use slicing
