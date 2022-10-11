@@ -25,7 +25,7 @@ def display_sample(sample):
 
 # Get input for image (x, y, theta)
 
-x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
+# x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
 
 
 scene_filepath = "../data/apartment_1.glb"

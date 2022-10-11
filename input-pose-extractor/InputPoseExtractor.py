@@ -1,7 +1,8 @@
 import numpy as np
 import habitat_sim.registry as registry
+from math import sin, cos
 
-from ImageExtractor import x, y, theta
+# from ImageExtractor import x, y, theta
 
 from habitat_sim.utils.data import ImageExtractor, PoseExtractor
 
@@ -15,15 +16,17 @@ class InputPoseExtractor(PoseExtractor):
 
         poses = []
 
+        x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
         point = (x, y)
 
         # calculating poi by rotation from looking up the y-axis 
         # using a fixed radius and to rotate from fixed radius
         # need to check if poi can be out of bounds
+        #  though, in theory it should not matter whether it's out of bounds or noT 
         # sin(90 - theta) 
         radius = 10
-        y_off = 10 * sin(90 - theta)
-        x_off = 10 * cos(90 - theta)
+        y_off = radius * sin(90 - theta)
+        x_off = radius * cos(90 - theta)
 
         point_of_interest = (int(x + x_off), int(y + y_off))
 
