@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import InputPoseExtractor 
-import pdb
+import os
 
 from habitat_sim.utils.data import ImageExtractor
 
@@ -43,12 +43,13 @@ extractor = ImageExtractor(
     split=(100,0)
 )
 
+os.remove("var-file.txt");
+
 # Use the list of train outputs instead of the default, which is the full list
 # of outputs (test + train)
 extractor.set_mode('train')
 
 # Index in to the extractor like a normal python list
-# pdb.set_trace()
 sample = extractor[0]
 
 # Or use slicing
