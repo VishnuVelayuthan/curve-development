@@ -17,10 +17,17 @@ class InputPoseExtractor(PoseExtractor):
 
         poses = []
 
-        x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
+        # x, y  theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
+
+        var_file = open("var-file.txt", "r")
+
+        x, y, theta = map(lambda x: int(x), var_file.read().split(" "))
+        
+        var_file.close();
+
         point = (x, y)
 
-        pdb.set_trace()
+        # pdb.set_trace()
         # calculating poi by rotation from looking up the y-axis 
         # using a fixed radius and to rotate from fixed radius
         # need to check if poi can be out of bounds
@@ -36,7 +43,7 @@ class InputPoseExtractor(PoseExtractor):
 
         poses.append(pose)
 
-        pdb.set_trace()
+        # pdb.set_trace()
         return poses
 
 

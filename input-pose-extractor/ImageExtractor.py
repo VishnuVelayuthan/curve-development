@@ -26,8 +26,12 @@ def display_sample(sample):
 
 # Get input for image (x, y, theta)
 
-# x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
 
+x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
+
+var_file = open("var-file.txt", "w")
+var_file.write(str(x) + " " + str(y) + " " + str(theta))
+var_file.close();
 
 scene_filepath = "../data/apartment_1.glb"
 
@@ -35,7 +39,8 @@ extractor = ImageExtractor(
     scene_filepath,
     img_size=(512, 512),
     output=["rgba", "depth", "semantic"],
-    pose_extractor_name="input_pose_extractor"
+    pose_extractor_name="input_pose_extractor",
+    split=(100,0)
 )
 
 # Use the list of train outputs instead of the default, which is the full list
@@ -43,7 +48,7 @@ extractor = ImageExtractor(
 extractor.set_mode('train')
 
 # Index in to the extractor like a normal python list
-pdb.set_trace()
+# pdb.set_trace()
 sample = extractor[0]
 
 # Or use slicing
