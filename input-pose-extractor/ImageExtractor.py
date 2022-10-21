@@ -24,13 +24,9 @@ def display_sample(sample):
     plt.show()
 
 
-# Get input for image (x, y, theta)
-
-
-x, y, theta = map(lambda x: int(x), input("Input x y theta: ").split(" "))
-
+# Get input for image (x, y, theta) and writing vars to file
 var_file = open("var-file.txt", "w")
-var_file.write(str(x) + " " + str(y) + " " + str(theta))
+var_file.write(input("Input x y theta: ")) # gets x y theta all seperated by a space
 var_file.close();
 
 scene_filepath = "../data/apartment_1.glb"
@@ -43,6 +39,7 @@ extractor = ImageExtractor(
     split=(100,0)
 )
 
+# remove temp var file 
 os.remove("var-file.txt");
 
 # Use the list of train outputs instead of the default, which is the full list
