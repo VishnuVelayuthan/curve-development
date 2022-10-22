@@ -32,12 +32,15 @@ class InputPoseExtractor(PoseExtractor):
         #  though, in theory it should not matter whether it's out of bounds or noT 
         # sin(90 - theta) 
         radius = 10
-        y_off = radius * sin(90 - theta)
-        x_off = radius * cos(90 - theta)
+        y_off = radius * sin(90 + theta)
+        x_off = radius * cos(90 + theta)
 
-        point_of_interest = (int(x + x_off), int(y + y_off))
+        point_of_interest = (int(x - x_off), int(y - y_off))
 
-        pose = (point, point_of_interest, fp)
+        if self._valid_point(x, y, view):
+            pose = (point, point_of_interest, fp)
+        else :
+            pose = ( (0,0) , (0,-10) , fp)
 
         poses.append(pose)
 
