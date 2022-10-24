@@ -47,7 +47,7 @@ def get_image_at(x, y, theta, display=False):
 
 # Use the list of train outputs instead of the default, which is the full list
 # of outputs (test + train)
-    extractor.set_mode('train')
+    extractor.set_mode("train")
 
 # Index in to the extractor like a normal python list
     sample = extractor[0]
@@ -58,7 +58,7 @@ def get_image_at(x, y, theta, display=False):
 # (see close method for detailed explanation)
     extractor.close()
 
-    return sample
+    return sample["rgba"]
 
 
 if __name__ == "__main__" :
