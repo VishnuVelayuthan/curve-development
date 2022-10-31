@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 import os
 import pdb
 
+from PIL import Image
 import pickle
 
 from habitat_sim.utils.data import ImageExtractor, PoseExtractor
 import habitat_sim.registry as registry
+
 
 # Class to extract occupancy grid from mesh scan 
 @registry.register_pose_extractor(name="og_conv_pdf")
@@ -42,4 +44,9 @@ og_file.close()
 
 print(og_view)
 
+
+maskArr = np.array(og_view, dtype=np.uint8) * 255
+
+maskImg =  Image.fromarray(maskArr, mode='L')
+maskImg.save("./maskImg.jpg")
 
