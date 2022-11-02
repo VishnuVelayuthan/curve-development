@@ -58,7 +58,7 @@ def get_img_of_occ_grid(pkl_fp, output_fp):
 
 
 def get_occ_grid_pkl_img(scene_fp, pkl_output_fp, img_output_fp):
-    get_occ_grid_pkl(scene_fp, pkl_output_fp)
+    get_pkl_of_occ_grid(scene_fp, pkl_output_fp)
     get_img_of_occ_grid(pkl_output_fp, img_output_fp)
 
 
