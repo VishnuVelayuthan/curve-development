@@ -21,33 +21,47 @@ class InputPoseExtractor(PoseExtractor):
     #   pose = (point on map, point to direct, fp)
     def extract_poses(self, view, fp):
 
-        og_file_name = "./og-var-" + fp[ 8 : len(fp)-4 ] + ".pkl"
-        pickle.dump(view, open( og_file_name , "wb" ))
+        var_file = open(".var-file.txt", "r") 
+        output_fp = var_file.read() 
+
+        pickle.dump(view, open(output_fp, "wb"))
 
         return [ ( (0,0), (0,1), fp ) ] # Dummy value 
 
 
+def get_pkl_of_occ_grid(scene_fp, output_fp):
 
-scene_filepath = "../data/apartment_1.glb"
-og_file_name = "./og-var-" + scene_filepath[ 8 : len(scene_filepath)-4 ] + ".pkl"
+    
+    var_file = open(".var-file.txt", "w")
+    var_file.write(output_fp)
+    var_file.close();
 
-extractor = ImageExtractor(
-    scene_filepath,
-    img_size=(512, 512),
-    output=["rgba", "depth", "semantic"],
-    pose_extractor_name="og_conv_pdf",
-    split=(100,0)
-)
-extractor.close()
+    extractor = ImageExtractor(
+        scene_fp,
+        img_size=(512, 512),
+        output=["rgba", "depth", "semantic"],
+        pose_extractor_name="og_conv_pdf",
+        split=(100,0)
+    )
 
-og_file = open(og_file_name, "rb")
-og_view = pickle.load(og_file)
-og_file.close()
-
-
-og_image_file = "./og-img-" + scene_filepath[ 8 : len(scene_filepath)-4 ] + ".jpg"
-mp.imshow(og_view)
-mp.savefig(og_image_file)
+    os.remove(".var-file.txt")
+    extractor.close()
 
 
+def get_img_of_occ_grid(pkl_fp, output_fp):
+    og_file = open(pkl_fp, "rb")
+    og_view = pickle.load(og_file)
+    og_file.close()
+
+    mp.imshow(og_view)
+    mp.savefig(output_fp)
+
+
+def get_occ_grid_pkl_img(scene_fp, pkl_output_fp, img_output_fp):
+    get_occ_grid_pkl(scene_fp, pkl_output_fp)
+    get_img_of_occ_grid(pkl_output_fp, img_output_fp)
+
+
+if __name__ == "__main__" :
+    get_occ_grid_pkl_img("../data/apartment_1.glb", "./og-var-apartment_1.pkl", "./og-img-apartment_1.jpg")
 
