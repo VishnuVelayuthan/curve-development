@@ -1,9 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import pdb
 
 from PIL import Image
+import matplotlib.pyplot as mp;
+
+
 import pickle
 
 from habitat_sim.utils.data import ImageExtractor, PoseExtractor
@@ -18,9 +20,8 @@ class InputPoseExtractor(PoseExtractor):
     # need to return an array of poses   
     #   pose = (point on map, point to direct, fp)
     def extract_poses(self, view, fp):
-        # pdb.set_trace()
 
-        og_file_name = "og-pdf-" + fp[ 8 : len(fp)-4 ] + ".pkl"
+        og_file_name = "./og-var-" + fp[ 8 : len(fp)-4 ] + ".pkl"
         pickle.dump(view, open( og_file_name , "wb" ))
 
         return [ ( (0,0), (0,1), fp ) ] # Dummy value 
@@ -28,7 +29,7 @@ class InputPoseExtractor(PoseExtractor):
 
 
 scene_filepath = "../data/apartment_1.glb"
-og_file_name = "og-pdf-" + scene_filepath[ 8 : len(scene_filepath)-4 ] + ".pkl"
+og_file_name = "./og-var-" + scene_filepath[ 8 : len(scene_filepath)-4 ] + ".pkl"
 
 extractor = ImageExtractor(
     scene_filepath,
@@ -37,16 +38,16 @@ extractor = ImageExtractor(
     pose_extractor_name="og_conv_pdf",
     split=(100,0)
 )
+extractor.close()
 
 og_file = open(og_file_name, "rb")
 og_view = pickle.load(og_file)
 og_file.close()
 
-print(og_view)
+
+og_image_file = "./og-img-" + scene_filepath[ 8 : len(scene_filepath)-4 ] + ".jpg"
+mp.imshow(og_view)
+mp.savefig(og_image_file)
 
 
-maskArr = np.array(og_view, dtype=np.uint8) * 255
-
-maskImg =  Image.fromarray(maskArr, mode='L')
-maskImg.save("./maskImg.jpg")
 
